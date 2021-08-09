@@ -1,5 +1,5 @@
 v1='f_';
-v2='_tlow.bmp';
+v2='_tlow.bmp';%try
 v4='_tun.bmp';
 frame=100;
 pic=zeros(360,400,100);
