@@ -14,10 +14,17 @@ for n=1:frame
     end
     ms=int2str(n);
     name=strcat(v1,m,ms,v2);
-    pic(:,:,n)=imread(name);
-    name2=strcat(v1,m,ms,v4);
     pic2(:,:,n)=imread(name);
+  
     kk(n)=pic(190,205,n);
+end
+for k=1:100
+    
+    for i=2:359
+        for j=1:400
+            pic(i,j,k)=pic2(i,j,k);
+        end
+    end
 end
 
 Max=zeros(360,400);
@@ -104,7 +111,6 @@ end
 %         end
 %     end
 % end
-% 
 
 
 unwrapedphase(:,:,:)=unwrap(wrapedphase2,[],2);
@@ -149,6 +155,12 @@ for k=20:25
     imshow((normalized_unwrapedphase(:,:,k)));
     title('解包裹');
 end
+un25=normalized_unwrapedphase(:,:,25);
+wrap25=wrapedphase2(:,:,25);
+pic25=pic(:,:,25);
+
+
+
 
 % kk1=reshape(wrapedphase(180,200,:),[1,100]);
 % kk2=reshape(wrapedphase2(180,200,:),[1,100]);
@@ -163,11 +175,27 @@ end
 % subplot(224);
 % plot(kk3);
 % title('展开相位');
-
-myobj= VideoWriter('myvideo4.avi');
-myobj.FrameRate = 5;
-open(myobj)
-for k=1:100
-    writeVideo(myobj, normalized_unwrapedphase(:,:,k));
+wrapedphase2=image_normalize(wrapedphase2);
+s1='w2';s2='.bmp';
+for n=1:100
+    
+     if(n<10)
+        m='00000';
+    elseif(n>9 && n<100)
+        m='0000';
+    else
+        m='000';
+    end
+    ms=int2str(n);
+    name2=strcat(s1,m,ms,s2);
+    imwrite(wrapedphase2(:,:,n),name2);
 end
-close(myobj)
+
+% myobj= VideoWriter('myvideo6.avi');
+% myobj.FrameRate = 5;
+% open(myobj)
+% 
+% for k=1:100
+%     writeVideo(myobj, wrapedphase2(:,:,k));
+% end
+% close(myobj)
