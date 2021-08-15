@@ -177,24 +177,24 @@ for i=1:h
                 if (pic(i,j,n)>=pic(i,j,n-1) &&  pic(i,j,n)>=pic(i,j,n+1))&&((Max(i,j)-pic(i,j,n))<=5)
                     ka=ka+1;
                     %                 MA(i,j,n)=pic(i,j,n);
-                    MAXn(ka+1)=n;
-                    if ka==1
-                        X(1)=pic(i,j,n);MAXn(1)=n;
+                       if ka==1
+                        X(1)=pic(i,j,n);MAXn(1)=1;
                     end
+                    MAXn(ka+1)=n;
                     X(ka+1)=pic(i,j,n);
                 end
                 if (pic(i,j,n)<=pic(i,j,n-1) &&  pic(i,j,n)<=pic(i,j,n+1)&&(pic(i,j,n)-Min(i,j))<=5)
                     ki=ki+1;
                     %                 MI(i,j,n)=pic(i,j,n);
                     if ki==1
-                        N(1)=pic(i,j,n);MINn(1)=n;
+                        N(1)=pic(i,j,n);MINn(1)=1;
                     end
-                    MINn(ki)=n;
-                    N(ki)=pic(i,j,n);
+                    MINn(ki+1)=n;
+                    N(ki+1)=pic(i,j,n);
                 end
             end
-            X(ka+1)=pic(i,j,ka);MAXn(1)=n;
-            N(ki+1)=pic(i,j,ki);MINn(ki+1)=100;
+            X(ka+1)=X(ka);MAXn(ka+1)=100;
+            N(ki+1)=N(ki);MINn(ki+1)=100;
 
             
                 
@@ -230,9 +230,9 @@ end
 % k1=reshape(pic(1,1,:),[1,100]);
 % k100=reshape(pic(100,100,:),[1,100]);
 %
-kk2a(:)=MAXi(85,4,:);
-kk2i(:)=MINi(85,4,:);
-q(:)=pic(85,4,:);
+kk2a(:)=MAX(85,7,:);
+kk2i(:)=MIN(85,7,:);
+q(:)=pic(85,7,:);
 
 XX=1:100;
 Y=[kk2a;kk2i;q].';
@@ -270,6 +270,12 @@ stackedplot(XX,Y);
 % w1=wrapedphase(:,:,1);
 % C2=C(:,:,1);
 % %%
+
+
+
+
+
+
 %     unwrapedphase(:,:,:)=unwrap(wrapedphase2,[],1);
 % for k=1:100
 %
